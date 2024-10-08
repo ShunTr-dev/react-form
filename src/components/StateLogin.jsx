@@ -6,8 +6,14 @@ export default function StateLogin() {
         password: '',
     })
 
+    const emailIsInvalid = enteredValues.email !== '' && !enteredValues.email.includes('@')
+
     function handleSubmit(event) {
         event.preventDefault()
+        // setEnteredValues({
+        //  email: '',
+        //  password: '',
+        // })
     }
 
     function handleInputChange(identifier, event) {
@@ -33,6 +39,7 @@ export default function StateLogin() {
                         onChange={(event) => handleInputChange('email', event)}
                         value={enteredValues.email}
                     />
+                    <div className="control-error">{emailIsInvalid && <p>Please enter a valid email address.</p>}</div>
                 </div>
 
                 <div className="control no-margin">
