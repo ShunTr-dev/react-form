@@ -23,7 +23,7 @@ export default function Login() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h2>Login</h2>
+            <h2>Login (with refs)</h2>
 
             <div className="control-row">
                 <div className="control no-margin">

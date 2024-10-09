@@ -21,7 +21,7 @@ export default function Signup() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h2>Welcome on board!</h2>
+            <h2>Welcome on board! (Form built-in)</h2>
             <p>We just need a little bit of data from you to get you started 🚀</p>
 
             <div className="control">
