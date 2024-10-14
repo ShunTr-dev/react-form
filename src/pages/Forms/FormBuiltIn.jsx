@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function Signup() {
+export default function FormBuiltIn() {
     const [passwordsAreNotEqual, setPasswordsAreNotEqual] = useState(false)
 
     function handleSubmit(event) {

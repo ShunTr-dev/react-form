@@ -1,6 +1,6 @@
-import Input from './Input'
-import { isEmail, isNotEmpty, hasMinLength } from '../util/validation'
-import { useInput } from '../hooks/useInput'
+import Input from '../../components/UI/Input'
+import { isEmail, isNotEmpty, hasMinLength } from '../../util/validation'
+import { useInput } from '../../hooks/useInput'
 
 export default function StateLogin() {
     const {
