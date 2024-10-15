@@ -1,9 +1,12 @@
-import { defer, Form, json, redirect, useLoaderData, useNavigate, useNavigation } from 'react-router-dom'
+import { Suspense } from 'react'
+import { Await, defer, Form, json, redirect, useLoaderData, useNavigate, useNavigation } from 'react-router-dom'
 
 export default function ReactRouter({ method }) {
-    const pokemonData = useLoaderData().pokemon
+    const { pokemon } = useLoaderData()
     const navigate = useNavigate()
     const navigation = useNavigation()
+
+    console.log('navigation:', navigation.state)
 
     const isSubmitting = navigation.state === 'submitting'
 
@@ -12,59 +15,80 @@ export default function ReactRouter({ method }) {
     }
 
     return (
-        <Form method="POST">
-            <h2>Pokemon form! (react-router-dom)</h2>
-            <p>
-                Using <a href="https://pokeapi.co/">https://pokeapi.co/</a>
-            </p>
+        <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
+            <Await resolve={pokemon}>
+                {(loadedPokemon) => {
+                    return (
+                        <Form method="POST">
+                            <h2>Pokemon form! (react-router-dom)</h2>
+                            <p>
+                                Using <a href="https://pokeapi.co/">https://pokeapi.co/</a>
+                            </p>
 
-            {pokemonData && pokemonData.errors && (
-                <ul>
-                    {Object.values(data.errors).map((err) => (
-                        <li key={err}>{err}</li>
-                    ))}
-                </ul>
-            )}
-            <div className="control">
-                <div className="control no-margin">
-                    <label htmlFor="title">Title</label>
-                    <input
-                        id="title"
-                        type="text"
-                        name="title"
-                        required
-                        defaultValue={pokemonData ? pokemonData.name : ''}
-                    />
-                </div>
-            </div>
+                            {loadedPokemon && loadedPokemon.errors && (
+                                <ul>
+                                    {Object.values(data.errors).map((err) => (
+                                        <li key={err}>{err}</li>
+                                    ))}
+                                </ul>
+                            )}
+                            <div className="control">
+                                <div className="control no-margin">
+                                    <label htmlFor="title">Title</label>
+                                    <input
+                                        id="title"
+                                        type="text"
+                                        name="title"
+                                        required
+                                        defaultValue={loadedPokemon ? loadedPokemon.name : ''}
+                                    />
+                                </div>
+                            </div>
 
-            <img src={pokemonData ? pokemonData.sprites.front_default : ''} alt={pokemonData ? pokemonData.name : ''} />
+                            <img
+                                src={loadedPokemon ? loadedPokemon.sprites.front_default : ''}
+                                alt={loadedPokemon ? loadedPokemon.name : ''}
+                            />
 
-            <div className="control no-margin">
-                <label htmlFor="image">Image</label>
-                <input
-                    id="image"
-                    type="url"
-                    name="image"
-                    required
-                    defaultValue={pokemonData ? pokemonData.sprites.front_default : ''}
-                />
-            </div>
+                            <div className="control no-margin">
+                                <label htmlFor="image">Image</label>
+                                <input
+                                    id="image"
+                                    type="url"
+                                    name="image"
+                                    required
+                                    defaultValue={loadedPokemon ? loadedPokemon.sprites.front_default : ''}
+                                />
+                            </div>
 
-            <div className="control no-margin">
-                <label htmlFor="date">Date</label>
-                <input id="date" type="date" name="date" required defaultValue={pokemonData ? '1996-02-27' : ''} />
-            </div>
+                            <div className="control no-margin">
+                                <label htmlFor="date">Date</label>
+                                <input
+                                    id="date"
+                                    type="date"
+                                    name="date"
+                                    required
+                                    defaultValue={loadedPokemon ? '1996-02-27' : ''}
+                                />
+                            </div>
 
-            <p className="form-actions">
-                <button type="button" onClick={cancelHandler} disabled={isSubmitting} className="button button-flat">
-                    Cancel
-                </button>
-                <button disabled={isSubmitting} className="button">
-                    {isSubmitting ? 'Submitting..' : 'Save'}
-                </button>
-            </p>
-        </Form>
+                            <p className="form-actions">
+                                <button
+                                    type="button"
+                                    onClick={cancelHandler}
+                                    disabled={isSubmitting}
+                                    className="button button-flat">
+                                    Cancel
+                                </button>
+                                <button disabled={isSubmitting} className="button">
+                                    {isSubmitting ? 'Submitting..' : 'Save'}
+                                </button>
+                            </p>
+                        </Form>
+                    )
+                }}
+            </Await>
+        </Suspense>
     )
 }
 
@@ -105,7 +129,7 @@ async function loadPokemon() {
 
 export async function loader({ request, params }) {
     return defer({
-        pokemon: await loadPokemon(),
+        pokemon: loadPokemon(),
         //events: loadEvents(),
     })
 }
