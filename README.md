@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0d6b5a0d-8917-4de6-bea8-762694032f77/deploy-status)](https://app.netlify.com/sites/react-forms-examples/deploys)
+
 # Ejemplos de Formularios en React
 
 Este repositorio contiene ejemplos de cómo gestionar formularios en React de diversas maneras, mostrando diferentes técnicas y enfoques para el manejo de formularios en aplicaciones basadas en esta librería. Es ideal para enseñar las diferencias y ventajas de cada método, y cómo se pueden adaptar a diferentes escenarios.
@@ -13,32 +15,32 @@ Este repositorio contiene ejemplos de cómo gestionar formularios en React de di
 
 ## Estructura del Proyecto
 
-El proyecto está organizado en diferentes carpetas según el enfoque utilizado para gestionar los formularios. 
-
-
-
+El proyecto está organizado en diferentes carpetas según el enfoque utilizado para gestionar los formularios.
 
 ## Instalación
 
 1. Clona el repositorio en tu máquina local:
-   ```bash
-   git clone https://github.com/ShunTr-dev/react-form
-   ```
+
+    ```bash
+    git clone https://github.com/ShunTr-dev/react-form
+    ```
 
 2. Navega al directorio del proyecto:
-   ```bash
-   cd react-form
-   ```
+
+    ```bash
+    cd react-form
+    ```
 
 3. Instala las dependencias necesarias:
-   ```bash
-   npm install
-   ```
+
+    ```bash
+    npm install
+    ```
 
 4. Inicia la aplicación en modo de desarrollo:
-   ```bash
-   npm run dev
-   ```
+    ```bash
+    npm run dev
+    ```
 
 ## Ejecución de los ejemplos
 
